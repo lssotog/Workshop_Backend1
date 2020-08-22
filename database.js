@@ -1,7 +1,7 @@
 const Visitante = require("./visitante");
 
 class Database {
-    constructor() {
+  constructor() {
     
     const visitante1 = new Visitante({
         name: "Daniela",
@@ -32,15 +32,15 @@ class Database {
     });
 
     this.visitantes = [visitante1, visitante2, visitante3, visitante4];
-    }
+  }
 
-getVisitantes() {
-    return this.visitantes;
-}
+ // Obtener el arreglo de visitantes
+  getVisitantes() {
+      return this.visitantes;
+  }
 
-//CREAR VISITANTE
-
-createVisitante(name, lastName, email) {
+  //CREAR VISITANTE
+  createVisitante(name, lastName, email) {
     return new Promise((resolve, reject) => {
       const visitantes = this.getVisitantes();
 
@@ -67,9 +67,9 @@ createVisitante(name, lastName, email) {
         id: lastVisitante.id + 1,
       });
 
-if (newVisitante.email.includes ("hotmail.com")||newVisitante.email.includes ("gmail.com")||newVisitante.email.includes ("yahooo.com") ){
-    reject (new Error ("No permitimos correos que terminen en hotmail.com, gmail.com o yahoo.com"))
-}
+      if (newVisitante.email.includes ("hotmail.com")||newVisitante.email.includes ("gmail.com")||newVisitante.email.includes ("yahooo.com") ){
+        reject (new Error ("No permitimos correos que terminen en hotmail.com, gmail.com o yahoo.com"))
+      }
       this.visitantes.push(newVisitante);
       resolve(newVisitante);
     });
