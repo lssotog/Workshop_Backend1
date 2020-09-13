@@ -3,7 +3,7 @@ const Visitante = require("./visitante");
 class Database {
   constructor() {
     
-    const visitante1 = new Visitante({
+    const visitante1 = new Visitante({ // new Visitante("Daniela","Riaño","daniela@hotmail.com",1);
         name: "Daniela",
         lastName: "Riano",
         email: "daniela@hotmail.com",

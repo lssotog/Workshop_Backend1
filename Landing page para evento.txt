@@ -5,3 +5,38 @@ Los visitantes deben tener la posibilidad de inscribirse, no puede haber emails 
 y no son aceptados los emails @hotmail.com, @gmail.com y @yahoo.com
 El desarrollo debe contar con una sección de administración privada que le permita ver al 
 organizador quienes están registrados en su evento.
+
+
+CREATE TABLE `evento`.`rol` (
+  `id_rol` INT NOT NULL AUTO_INCREMENT,
+  `rol` ENUM('visitante', 'administrador') NOT NULL DEFAULT 'visitante',
+  PRIMARY KEY (`id_rol`));
+
+  CREATE TABLE `evento`.`persona` (
+  `idpersona` INT NOT NULL AUTO_INCREMENT,
+  `name` VARCHAR(255) NOT NULL,
+  `last_name` VARCHAR(255) NOT NULL,
+  `email` VARCHAR(255) NOT NULL,
+  `id_rol` INT NOT NULL,
+  PRIMARY KEY (`idpersona`),
+  INDEX `id_rol_idx` (`id_rol` ASC) VISIBLE,
+  CONSTRAINT `id_rol`
+    FOREIGN KEY (`id_rol`)
+    REFERENCES `evento`.`rol` (`id_rol`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION);
+
+    ALTER TABLE `evento`.`persona` 
+ADD UNIQUE INDEX `email_UNIQUE` (`email` ASC) VISIBLE;
+;
+
+INSERT INTO `evento`.`rol` (`rol`) VALUES ('adminsitrador');
+INSERT INTO `evento`.`rol` (`rol`) VALUES ('visitante');
+
+.then ((data)=>{
+            res.status(201).json (data[0])
+        })
+        .catch ((error)=>{
+            res.status(500);
+            res.json(error);
+        })
